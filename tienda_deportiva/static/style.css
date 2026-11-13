@@ -1,0 +1,668 @@
+/* 
+   DeporteTotal - Estilos Personalizados 
+   Colores Deportivos: Negro, Azul Eléctrico, Verde Neón
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+    --color-dark-bg: #121214;
+    --color-card-bg: #1a1a1e;
+    --color-blue-accent: #00b4d8;
+    --color-blue-hover: #0077b6;
+    --color-green-accent: #39ff14;
+    --color-green-glow: rgba(57, 255, 20, 0.4);
+    --color-text-white: #f8f9fa;
+    --color-text-gray: #a0a0ab;
+    --font-primary: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    background-color: var(--color-dark-bg);
+    color: var(--color-text-white);
+    font-family: var(--font-primary);
+    overflow-x: hidden;
+}
+
+/* Tipografías especiales */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.text-gradient-sport {
+    background: linear-gradient(135deg, var(--color-blue-accent), var(--color-green-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Barra de Navegación */
+.navbar {
+    background-color: rgba(18, 18, 20, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.brand-text {
+    background: linear-gradient(90deg, #fff, var(--color-blue-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-accent {
+    color: var(--color-green-accent);
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--color-text-white) !important;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 1rem !important;
+    transition: var(--transition-smooth);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--color-green-accent) !important;
+    text-shadow: 0 0 10px var(--color-green-glow);
+}
+
+.cart-icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--color-green-accent);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px var(--color-green-glow);
+}
+
+/* Banner de Héroe */
+.hero-banner {
+    position: relative;
+    background: linear-gradient(180deg, rgba(18,18,20,0.4) 0%, rgba(18,18,20,0.9) 100%), 
+                url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=1920');
+    background-size: cover;
+    background-position: center;
+    padding: 120px 0 80px 0;
+    border-bottom: 3px solid var(--color-blue-accent);
+    margin-bottom: 3rem;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 80% 20%, rgba(0, 180, 216, 0.15), transparent 50%);
+    pointer-events: none;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    color: var(--color-text-gray);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+/* Categorías Deportivas */
+.category-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 220px;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 20px;
+    text-decoration: none !important;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    z-index: 1;
+    transition: var(--transition-smooth);
+}
+
+.category-title {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 800;
+    z-index: 2;
+    margin: 0;
+    transition: var(--transition-smooth);
+}
+
+.category-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--color-green-accent);
+    font-size: 2rem;
+    z-index: 2;
+    opacity: 0.8;
+    transition: var(--transition-smooth);
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-green-accent);
+    box-shadow: 0 10px 25px rgba(57, 255, 20, 0.15);
+}
+
+.category-card:hover::before {
+    background: linear-gradient(0deg, rgba(0, 180, 216, 0.8) 0%, rgba(0,0,0,0.4) 100%);
+}
+
+.category-card:hover .category-title {
+    color: #fff;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 1;
+}
+
+/* Tarjetas de Productos */
+.product-card {
+    background-color: var(--color-card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-smooth);
+    margin-bottom: 24px;
+}
+
+.product-image-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #212529;
+    padding-top: 100%; /* 1:1 Aspect Ratio */
+}
+
+.product-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--color-blue-accent);
+    color: #000;
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-blue-accent);
+    box-shadow: 0 12px 30px rgba(0, 180, 216, 0.15);
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.1);
+}
+
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-category {
+    font-family: var(--font-mono);
+    color: var(--color-green-accent);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 8px;
+    letter-spacing: 0.1em;
+}
+
+.product-name {
+    color: var(--color-text-white);
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.product-desc {
+    color: var(--color-text-gray);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.product-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.product-price {
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-text-white);
+}
+
+/* Botones con estilo deportivo */
+.btn-sport-blue {
+    background-color: var(--color-blue-accent);
+    color: #000 !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-sport-blue:hover {
+    background-color: #00e5ff;
+    box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-sport-green {
+    background-color: var(--color-green-accent);
+    color: #000 !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-sport-green:hover {
+    background-color: #55ff3c;
+    box-shadow: 0 0 15px var(--color-green-glow);
+    transform: translateY(-2px);
+}
+
+.btn-sport-outline {
+    background-color: transparent;
+    color: var(--color-text-white);
+    border: 2px solid var(--color-text-white);
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: var(--transition-smooth);
+}
+
+.btn-sport-outline:hover {
+    background-color: var(--color-text-white);
+    color: #000 !important;
+}
+
+/* Buscador y filtros */
+.search-input-group {
+    background-color: var(--color-card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    overflow: hidden;
+    padding: 2px 5px 2px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    padding: 10px 0;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.search-input::placeholder {
+    color: var(--color-text-gray);
+}
+
+.search-btn {
+    background-color: var(--color-blue-accent);
+    border: none;
+    color: #000;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.search-btn:hover {
+    background-color: #00e5ff;
+}
+
+.filter-pill {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-white);
+    text-decoration: none !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: var(--transition-smooth);
+    border: 1px solid transparent;
+}
+
+.filter-pill:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-green-accent);
+}
+
+.filter-pill.active {
+    background-color: var(--color-green-accent);
+    color: #000 !important;
+    font-weight: 700;
+    box-shadow: 0 0 12px var(--color-green-glow);
+}
+
+/* Tabla de Carrito */
+.cart-table-card {
+    background-color: var(--color-card-bg);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.cart-table {
+    color: var(--color-text-white);
+    margin-bottom: 0;
+}
+
+.cart-table th {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-gray);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.cart-table td {
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px 0;
+}
+
+.cart-img-preview {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.qty-input {
+    width: 65px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    font-family: var(--font-mono);
+}
+
+.delete-link {
+    color: var(--color-text-gray);
+    transition: var(--transition-smooth);
+}
+
+.delete-link:hover {
+    color: #ff3333;
+}
+
+.summary-card {
+    background-color: var(--color-card-bg);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px;
+}
+
+/* Formularios de Pago y Contacto */
+.form-card {
+    background-color: var(--color-card-bg);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 30px;
+}
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    padding: 12px 15px !important;
+    font-family: var(--font-primary);
+}
+
+.form-control:focus {
+    border-color: var(--color-blue-accent) !important;
+    box-shadow: 0 0 10px rgba(0, 180, 216, 0.2) !important;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--color-text-gray);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Pie de Página */
+.footer {
+    background-color: #0b0b0c;
+    border-top: 2px solid rgba(255, 255, 255, 0.05);
+    padding: 60px 0 30px 0;
+    margin-top: 5rem;
+}
+
+.footer-heading {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #fff;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-green-accent);
+}
+
+.footer-text {
+    color: var(--color-text-gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: var(--color-text-gray);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+}
+
+.footer-links a:hover {
+    color: var(--color-green-accent);
+    padding-left: 5px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon-btn {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-white);
+    transition: var(--transition-smooth);
+    text-decoration: none !important;
+}
+
+.social-icon-btn:hover {
+    background-color: var(--color-blue-accent);
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
+}
+
+/* Alertas de Flash */
+.alert {
+    background-color: var(--color-card-bg);
+    border: none;
+    border-left: 4px solid #fff;
+    color: #fff;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.alert-success {
+    border-left-color: var(--color-green-accent);
+}
+
+.alert-danger {
+    border-left-color: #ff3333;
+}
+
+.alert-warning {
+    border-left-color: #ffcc00;
+}
+
+.alert-info {
+    border-left-color: var(--color-blue-accent);
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+    animation-delay: 0.3s;
+}

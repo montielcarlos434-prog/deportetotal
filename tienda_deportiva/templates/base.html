@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DeporteTotal - Tienda Deportiva de Alto Rendimiento{% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Estilos Personalizados -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <!-- Menú de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="main_navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}" id="nav_brand">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top rounded-circle me-2" style="border: 2px solid var(--color-green-accent);" id="nav_logo">
+                <span class="brand-text">DEPORTE<span class="brand-accent">TOTAL</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" id="nav_toggle_btn">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4" id="nav_links_list">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}" id="link_inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'productos' %}active{% endif %}" href="{{ url_for('productos') }}" id="link_productos">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'contacto' %}active{% endif %}" href="{{ url_for('contacto') }}" id="link_contacto">Contacto</a>
+                    </li>
+                </ul>
+                
+                <!-- Buscador rápido de productos -->
+                <form class="d-flex me-3" action="{{ url_for('productos') }}" method="GET" id="quick_search_form">
+                    <div class="search-input-group">
+                        <input class="search-input" type="search" placeholder="Buscar productos..." aria-label="Search" name="search" value="{{ search_query or '' }}" id="quick_search_input">
+                        <button class="search-btn" type="submit" id="quick_search_btn">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Botón Carrito de Compras -->
+                <div class="d-flex align-items-center" id="cart_btn_container">
+                    <a href="{{ url_for('carrito') }}" class="btn btn-sport-green px-3 cart-icon-wrapper" id="nav_cart_link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="d-none d-lg-inline ms-1">Carrito</span>
+                        {% if cart_count > 0 %}
+                            <span class="cart-badge" id="cart_badge_qty">{{ cart_count }}</span>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Notificaciones Flash -->
+    <div class="container mt-4" id="flash_notifications_container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show animate-fade-in" role="alert" id="alert_{{ loop.index }}">
+                        <i class="fa-solid {% if category == 'success' %}fa-circle-check{% elif category == 'danger' %}fa-circle-exclamation{% elif category == 'warning' %}fa-triangle-exclamation{% else %}fa-circle-info{% endif %} me-2"></i>
+                        {{ message }}
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Contenido Principal -->
+    <main id="main_content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="footer" id="main_footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" id="footer_col_about">
+                    <h5 class="footer-heading" id="footer_about_heading">DEPORTE TOTAL</h5>
+                    <p class="footer-text" id="footer_about_text">
+                        Somos tu aliado estratégico en el alto rendimiento. Equipamos tu pasión con la mejor tecnología en calzado, balones y accesorios deportivos de las mejores marcas.
+                    </p>
+                    <div class="social-icons mt-3" id="footer_social_icons">
+                        <a href="https://facebook.com" class="social-icon-btn" target="_blank" id="social_fb"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://instagram.com" class="social-icon-btn" target="_blank" id="social_ig"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://twitter.com" class="social-icon-btn" target="_blank" id="social_tw"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://youtube.com" class="social-icon-btn" target="_blank" id="social_yt"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6" id="footer_col_links">
+                    <h5 class="footer-heading" id="footer_links_heading">Enlaces Rápidos</h5>
+                    <ul class="footer-links" id="footer_links_list">
+                        <li><a href="{{ url_for('index') }}" id="footer_link_inicio">Inicio</a></li>
+                        <li><a href="{{ url_for('productos') }}" id="footer_link_productos">Nuestros Productos</a></li>
+                        <li><a href="{{ url_for('contacto') }}" id="footer_link_contacto">Contacto / Soporte</a></li>
+                        <li><a href="{{ url_for('carrito') }}" id="footer_link_carrito">Mi Carrito</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6" id="footer_col_categories">
+                    <h5 class="footer-heading" id="footer_categories_heading">Categorías</h5>
+                    <ul class="footer-links" id="footer_categories_list">
+                        <li><a href="{{ url_for('productos', categoria='Fútbol') }}" id="footer_cat_futbol">Fútbol</a></li>
+                        <li><a href="{{ url_for('productos', categoria='Baloncesto') }}" id="footer_cat_baloncesto">Baloncesto</a></li>
+                        <li><a href="{{ url_for('productos', categoria='Running') }}" id="footer_cat_running">Running</a></li>
+                        <li><a href="{{ url_for('productos', categoria='Gimnasio') }}" id="footer_cat_gimnasio">Gimnasio</a></li>
+                        <li><a href="{{ url_for('productos', categoria='Ciclismo') }}" id="footer_cat_ciclismo">Ciclismo</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6" id="footer_col_contact">
+                    <h5 class="footer-heading" id="footer_contact_heading">Contacto</h5>
+                    <p class="footer-text mb-2" id="footer_address">
+                        <i class="fa-solid fa-location-dot text-gradient-sport me-2"></i> Av. Olimpica 450, Ciudad de Deportes
+                    </p>
+                    <p class="footer-text mb-2" id="footer_phone">
+                        <i class="fa-solid fa-phone text-gradient-sport me-2"></i> +34 912 345 678
+                    </p>
+                    <p class="footer-text mb-2" id="footer_email">
+                        <i class="fa-solid fa-envelope text-gradient-sport me-2"></i> soporte@deportetotal.com
+                    </p>
+                    <p class="footer-text" id="footer_hours">
+                        <i class="fa-solid fa-clock text-gradient-sport me-2"></i> Lun - Sáb: 9:00 AM - 8:00 PM
+                    </p>
+                </div>
+            </div>
+            <div class="border-top border-secondary mt-4 pt-3 text-center" id="footer_copyright_container">
+                <p class="footer-text mb-0" id="copyright_text">&copy; 2026 DeporteTotal S.A. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

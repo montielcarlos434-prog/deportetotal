@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - DeporteTotal - Tienda de Artículos Deportivos{% endblock %}
+
+{% block content %}
+<!-- Banner Principal (Héroe) -->
+<section class="hero-banner d-flex align-items-center" id="hero_section">
+    <div class="container text-start">
+        <div class="row">
+            <div class="col-lg-8" id="hero_text_col">
+                <span class="badge bg-success mb-3 text-uppercase px-3 py-2 fw-bold" style="letter-spacing: 0.1em;" id="hero_badge">Temporada de Rendimiento 2026</span>
+                <h1 class="hero-title animate-fade-in" id="hero_heading">
+                    Siente el Poder, <br>
+                    <span class="text-gradient-sport">Domina el Juego</span>
+                </h1>
+                <p class="hero-subtitle animate-fade-in animate-delay-1" id="hero_desc">
+                    Explora nuestra colección premium de equipamiento deportivo para atletas que buscan superar sus propios límites. Calidad, resistencia y aerodinámica en un solo lugar.
+                </p>
+                <div class="d-flex gap-3 animate-fade-in animate-delay-2" id="hero_actions">
+                    <a href="{{ url_for('productos') }}" class="btn btn-sport-green btn-lg px-4 py-3" id="hero_cta_shop">
+                        <i class="fa-solid fa-fire-flame-curved"></i> Comprar Ahora
+                    </a>
+                    <a href="#categories_section" class="btn btn-sport-outline btn-lg px-4 py-3" id="hero_cta_categories">
+                        Categorías
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sección de Categorías -->
+<section class="container my-5 py-3" id="categories_section">
+    <div class="text-center mb-5" id="categories_header">
+        <h2 class="text-gradient-sport mb-2" id="categories_title">Explora por Categorías</h2>
+        <p class="text-secondary" id="categories_subtitle">Encuentra los artículos específicos para tu pasión deportiva</p>
+    </div>
+    
+    <div class="row g-4" id="categories_grid">
+        <!-- Fútbol -->
+        <div class="col-lg-4 col-md-6" id="cat_card_futbol_col">
+            <a href="{{ url_for('productos', categoria='Fútbol') }}" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=600');" id="cat_card_futbol">
+                <i class="fa-solid fa-circle-nodes category-icon" id="cat_icon_futbol"></i>
+                <h3 class="category-title" id="cat_title_futbol">Fútbol</h3>
+            </a>
+        </div>
+        <!-- Baloncesto -->
+        <div class="col-lg-4 col-md-6" id="cat_card_baloncesto_col">
+            <a href="{{ url_for('productos', categoria='Baloncesto') }}" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=600');" id="cat_card_baloncesto">
+                <i class="fa-solid fa-basketball category-icon" id="cat_icon_baloncesto"></i>
+                <h3 class="category-title" id="cat_title_baloncesto">Baloncesto</h3>
+            </a>
+        </div>
+        <!-- Running -->
+        <div class="col-lg-4 col-md-6" id="cat_card_running_col">
+            <a href="{{ url_for('productos', categoria='Running') }}" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&q=80&w=600');" id="cat_card_running">
+                <i class="fa-solid fa-person-running category-icon" id="cat_icon_running"></i>
+                <h3 class="category-title" id="cat_title_running">Running</h3>
+            </a>
+        </div>
+        <!-- Gimnasio -->
+        <div class="col-lg-6 col-md-6" id="cat_card_gimnasio_col">
+            <a href="{{ url_for('productos', categoria='Gimnasio') }}" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800');" id="cat_card_gimnasio">
+                <i class="fa-solid fa-dumbbell category-icon" id="cat_icon_gimnasio"></i>
+                <h3 class="category-title" id="cat_title_gimnasio">Gimnasio</h3>
+            </a>
+        </div>
+        <!-- Ciclismo -->
+        <div class="col-lg-6 col-md-12" id="cat_card_ciclismo_col">
+            <a href="{{ url_for('productos', categoria='Ciclismo') }}" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&q=80&w=800');" id="cat_card_ciclismo">
+                <i class="fa-solid fa-bicycle category-icon" id="cat_icon_ciclismo"></i>
+                <h3 class="category-title" id="cat_title_ciclismo">Ciclismo</h3>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Sección de Productos Destacados -->
+<section class="container my-5 py-3" id="featured_section">
+    <div class="d-flex justify-content-between align-items-end mb-5" id="featured_header">
+        <div id="featured_header_titles">
+            <h2 class="text-gradient-sport mb-2" id="featured_title">Productos Destacados</h2>
+            <p class="text-secondary mb-0" id="featured_subtitle">Nuestra recomendación de alto rendimiento</p>
+        </div>
+        <a href="{{ url_for('productos') }}" class="btn btn-sport-outline d-none d-md-inline-block" id="featured_view_all_btn">
+            Ver Catálogo Completo <i class="fa-solid fa-arrow-right ms-2"></i>
+        </a>
+    </div>
+
+    <div class="row g-4" id="featured_grid">
+        {% for producto in destacados %}
+        <div class="col-xl-3 col-lg-4 col-md-6" id="prod_col_{{ producto.id }}">
+            <div class="product-card" id="prod_card_{{ producto.id }}">
+                <div class="product-image-container" id="prod_img_container_{{ producto.id }}">
+                    <span class="product-badge" id="prod_badge_{{ producto.id }}">{{ producto.categoria }}</span>
+                    <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" class="product-img" loading="lazy" id="prod_img_{{ producto.id }}">
+                </div>
+                <div class="product-info" id="prod_info_{{ producto.id }}">
+                    <span class="product-category" id="prod_cat_{{ producto.id }}">{{ producto.categoria }}</span>
+                    <h4 class="product-name" id="prod_name_{{ producto.id }}">{{ producto.nombre }}</h4>
+                    <p class="product-desc" id="prod_desc_{{ producto.id }}">{{ producto.descripcion[:100] }}...</p>
+                    <div class="product-price-row" id="prod_price_row_{{ producto.id }}">
+                        <span class="product-price" id="prod_price_{{ producto.id }}">${{ "%.2f"|format(producto.precio) }}</span>
+                        <a href="{{ url_for('agregar_al_carrito', producto_id=producto.id) }}" class="btn btn-sport-blue" id="prod_btn_{{ producto.id }}">
+                            <i class="fa-solid fa-cart-plus"></i> Añadir
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Banner Promocional -->
+<section class="container my-5" id="promo_section">
+    <div class="card p-5 border-0 rounded-4 text-center text-md-start" style="background: linear-gradient(135deg, rgba(0, 180, 216, 0.15) 0%, rgba(57, 255, 20, 0.1) 100%), var(--color-card-bg); border: 1px solid rgba(255, 255, 255, 0.05) !important;" id="promo_card">
+        <div class="row align-items-center" id="promo_row">
+            <div class="col-md-8 mb-4 mb-md-0" id="promo_text_col">
+                <h3 class="text-gradient-sport mb-3" style="font-weight: 800;" id="promo_title">¿Eres un atleta regular?</h3>
+                <h2 class="text-white mb-3" id="promo_subtitle">¡Únete a nuestro Club de Descuentos Elite!</h2>
+                <p class="text-secondary mb-0" id="promo_desc">Regístrate en nuestro newsletter para obtener un 15% de descuento en tu primera compra, acceso prioritario a nuevos lanzamientos y ofertas exclusivas de fin de semana.</p>
+            </div>
+            <div class="col-md-4 text-md-end" id="promo_action_col">
+                <a href="{{ url_for('contacto') }}" class="btn btn-sport-green btn-lg px-4 py-3 w-100" id="promo_btn">
+                    <i class="fa-solid fa-user-plus"></i> Registrarme Ahora
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

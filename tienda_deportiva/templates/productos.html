@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Productos - DeporteTotal - Catálogo de Artículos Deportivos{% endblock %}
+
+{% block content %}
+<div class="container my-5 pt-4" id="productos_container">
+    
+    <!-- Encabezado de Productos -->
+    <div class="row align-items-center mb-5 g-4" id="productos_header_row">
+        <div class="col-md-6" id="productos_title_col">
+            <h1 class="text-gradient-sport mb-2" id="productos_title">Catálogo Completo</h1>
+            <p class="text-secondary mb-0" id="productos_subtitle">
+                {% if categoria_activa %}
+                    Mostrando productos de la categoría: <strong class="text-white">{{ categoria_activa }}</strong>
+                {% elif search_query %}
+                    Resultados de búsqueda para: <strong class="text-white">"{{ search_query }}"</strong>
+                {% else %}
+                    Explora nuestra amplia variedad de artículos deportivos premium
+                {% endif %}
+            </p>
+        </div>
+        
+        <!-- Buscador más completo -->
+        <div class="col-md-6" id="productos_search_col">
+            <form action="{{ url_for('productos') }}" method="GET" id="catalog_search_form">
+                {% if categoria_activa %}
+                    <input type="hidden" name="categoria" value="{{ categoria_activa }}">
+                {% endif %}
+                <div class="search-input-group w-100" style="max-width: 500px; margin-left: auto;">
+                    <input class="search-input" type="search" placeholder="Buscar por nombre, descripción..." aria-label="Search" name="search" value="{{ search_query or '' }}" id="catalog_search_input">
+                    <button class="search-btn" type="submit" id="catalog_search_btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Menú de Filtros por Categoría (Pills) -->
+    <div class="mb-5" id="filters_section">
+        <h6 class="text-secondary text-uppercase mb-3 fw-bold" style="letter-spacing: 0.1em;" id="filters_title">Filtrar por Deporte:</h6>
+        <div class="d-flex flex-wrap gap-2" id="filters_pills_container">
+            <a href="{{ url_for('productos', search=search_query) }}" class="filter-pill {% if not categoria_activa %}active{% endif %}" id="filter_all">
+                Todos los deportes
+            </a>
+            {% for cat in categorias %}
+                <a href="{{ url_for('productos', categoria=cat, search=search_query) }}" class="filter-pill {% if categoria_activa|lower == cat|lower %}active{% endif %}" id="filter_{{ cat|lower }}">
+                    {{ cat }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Rejilla de Productos -->
+    {% if productos %}
+        <div class="row g-4" id="productos_grid">
+            {% for producto in productos %}
+            <div class="col-xl-3 col-lg-4 col-md-6" id="prod_col_{{ producto.id }}">
+                <div class="product-card" id="prod_card_{{ producto.id }}">
+                    <div class="product-image-container" id="prod_img_container_{{ producto.id }}">
+                        <span class="product-badge" id="prod_badge_{{ producto.id }}">{{ producto.categoria }}</span>
+                        <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" class="product-img" loading="lazy" id="prod_img_{{ producto.id }}">
+                    </div>
+                    <div class="product-info" id="prod_info_{{ producto.id }}">
+                        <span class="product-category" id="prod_cat_{{ producto.id }}">{{ producto.categoria }}</span>
+                        <h4 class="product-name" id="prod_name_{{ producto.id }}">{{ producto.nombre }}</h4>
+                        <p class="product-desc" id="prod_desc_{{ producto.id }}">{{ producto.descripcion }}</p>
+                        <div class="product-price-row" id="prod_price_row_{{ producto.id }}">
+                            <span class="product-price" id="prod_price_{{ producto.id }}">${{ "%.2f"|format(producto.precio) }}</span>
+                            <a href="{{ url_for('agregar_al_carrito', producto_id=producto.id) }}" class="btn btn-sport-blue" id="prod_btn_{{ producto.id }}">
+                                <i class="fa-solid fa-cart-plus"></i> Añadir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Mensaje de no resultados -->
+        <div class="text-center py-5 my-5" id="no_results_container">
+            <div class="mb-4" id="no_results_icon">
+                <i class="fa-solid fa-face-frown text-secondary" style="font-size: 5rem;"></i>
+            </div>
+            <h3 class="text-white mb-3" id="no_results_title">No se encontraron productos</h3>
+            <p class="text-secondary max-width-600 mx-auto" id="no_results_desc">No hay artículos que coincidan con tu criterio de búsqueda. Intenta limpiando los filtros o buscando otro término.</p>
+            <div class="mt-4" id="no_results_actions">
+                <a href="{{ url_for('productos') }}" class="btn btn-sport-green px-4 py-2" id="no_results_reset_btn">
+                    <i class="fa-solid fa-rotate-left"></i> Ver Todos los Productos
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

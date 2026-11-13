@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}Contacto - DeporteTotal - Soporte y Ubicaciones{% endblock %}
+
+{% block content %}
+<div class="container my-5 pt-4" id="contacto_page_container">
+    
+    <div class="text-center mb-5" id="contacto_header">
+        <h1 class="text-gradient-sport mb-2" id="contacto_title">Contáctanos</h1>
+        <p class="text-secondary" id="contacto_subtitle">¿Tienes alguna duda sobre tallas, envíos o patrocinios? Estamos aquí para ayudarte.</p>
+    </div>
+
+    <div class="row g-5" id="contacto_row">
+        <!-- Formulario de Contacto -->
+        <div class="col-lg-7" id="contacto_form_col">
+            <div class="form-card animate-fade-in" id="contacto_form_card_div">
+                <h3 class="text-white mb-4" id="form_section_title">Envíanos un Mensaje</h3>
+                
+                <form action="{{ url_for('contacto') }}" method="POST" id="contact_form_element">
+                    <div class="row g-3" id="form_inputs_row">
+                        <div class="col-md-6" id="form_name_col">
+                            <label for="nombre" class="form-label" id="lbl_c_nombre">Nombre Completo</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Carlos Montiel" required>
+                        </div>
+                        <div class="col-md-6" id="form_email_col">
+                            <label for="email" class="form-label" id="lbl_c_email">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Ej. carlos@correo.com" required>
+                        </div>
+                        <div class="col-12" id="form_subject_col">
+                            <label for="asunto" class="form-label" id="lbl_c_asunto">Asunto</label>
+                            <input type="text" class="form-control" id="asunto" name="asunto" placeholder="Ej. Consulta sobre garantía de zapatillas" required>
+                        </div>
+                        <div class="col-12" id="form_msg_col">
+                            <label for="mensaje" class="form-label" id="lbl_c_mensaje">Mensaje o Comentarios</label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="6" placeholder="Escribe aquí tu mensaje en detalle..." required></textarea>
+                        </div>
+                        <div class="col-12 mt-4" id="form_submit_col">
+                            <button type="submit" class="btn btn-sport-green btn-lg px-4 py-3" id="contact_submit_btn">
+                                <i class="fa-solid fa-paper-plane"></i> Enviar Mensaje Seguro
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Información de Tienda y Ubicación -->
+        <div class="col-lg-5" id="contacto_info_col">
+            <!-- Detalles de Contacto -->
+            <div class="card p-4 border-0 rounded-4 mb-4" style="background-color: var(--color-card-bg); border: 1px solid rgba(255,255,255,0.05) !important;" id="info_card_details">
+                <h3 class="text-white mb-4" id="info_card_title">Canales de Soporte</h3>
+                
+                <div class="d-flex align-items-start mb-3" id="info_item_location">
+                    <div class="btn-sport-blue p-0 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; flex-shrink: 0;" id="icon_location_container">
+                        <i class="fa-solid fa-location-dot" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <div id="text_location_container">
+                        <h6 class="text-white mb-1" id="info_label_location">Sede Central</h6>
+                        <p class="text-secondary mb-0" id="info_val_location">Avenida Olímpica 450, Piso 2, Ciudad de Deportes, España</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-start mb-3" id="info_item_phone">
+                    <div class="btn-sport-blue p-0 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; flex-shrink: 0;" id="icon_phone_container">
+                        <i class="fa-solid fa-phone" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <div id="text_phone_container">
+                        <h6 class="text-white mb-1" id="info_label_phone">Teléfonos de Atención</h6>
+                        <p class="text-secondary mb-0" id="info_val_phone">+34 912 345 678 / +34 912 345 679</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-start mb-3" id="info_item_email">
+                    <div class="btn-sport-blue p-0 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; flex-shrink: 0;" id="icon_email_container">
+                        <i class="fa-solid fa-envelope" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <div id="text_email_container">
+                        <h6 class="text-white mb-1" id="info_label_email">Correo Electrónico Directo</h6>
+                        <p class="text-secondary mb-0" id="info_val_email">soporte@deportetotal.com / ventas@deportetotal.com</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-start" id="info_item_hours">
+                    <div class="btn-sport-blue p-0 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; flex-shrink: 0;" id="icon_hours_container">
+                        <i class="fa-solid fa-clock" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <div id="text_hours_container">
+                        <h6 class="text-white mb-1" id="info_label_hours">Horario Comercial</h6>
+                        <p class="text-secondary mb-0" id="info_val_hours">Lunes a Sábado: 9:00 AM - 8:00 PM<br>Domingos: Cerrado por descanso deportivo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mapa Interactivo (Placeholder Estilizado con iframe real o mock) -->
+            <div class="card border-0 rounded-4 overflow-hidden" style="background-color: var(--color-card-bg); height: 250px; position: relative; border: 1px solid rgba(255,255,255,0.05) !important;" id="info_card_map">
+                <!-- Iframe de Google Maps real para simular ubicación profesional -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12148.431268482436!2d-3.6931584999999996!3d40.41725515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42287d3a01129b%3A0x6b4efb1e3e7b165!2sParque%20del%20Retiro!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0; filter: grayscale(1) invert(0.9) contrast(1.2);" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    id="map_iframe">
+                </iframe>
+                <div class="position-absolute bottom-0 start-0 m-3 px-3 py-2 rounded shadow text-dark fw-bold" style="background-color: var(--color-green-accent); font-size: 0.8rem; z-index: 10;" id="map_overlay_label">
+                    <i class="fa-solid fa-map-pin me-1"></i> ¡Visítanos en Tienda!
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
